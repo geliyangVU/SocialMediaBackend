@@ -7,6 +7,12 @@ const morgan = require("morgan");
 
 dotenv.config();
 
+const connectDB = require("./config/db");
+
+require("dotenv").config();
+
+connectDB();
+
 app.listen(8800, () => {
   console.log("backend ready");
 });
