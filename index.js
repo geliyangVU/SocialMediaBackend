@@ -10,14 +10,37 @@ const postRoute = require("./routes/posts");
 const conversationRoute = require("./routes/conversations");
 const messageRoute = require("./routes/messages");
 
+const multer = require("multer");
+const path = require("path");
+
 const connectDB = require("./config/db");
 dotenv.config();
 connectDB();
+
+app.use("/images", express.static(path.join(__dirname, "public/images")));
 
 //middleware
 app.use(express.json());
 app.use(helmet());
 app.use(morgan("common"));
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "public/images");
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
+
+const upload = multer({ storage });
+app.post("/api/upload", upload.single("file"), (req, res) => {
+  try {
+    return res.status(200).json("file uploaded successfully");
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 app.use("/api/users", userRoute);
 app.use("/api/auth", authRoute);
