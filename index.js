@@ -9,6 +9,7 @@ const authRoute = require("./routes/auth");
 const postRoute = require("./routes/posts");
 const conversationRoute = require("./routes/conversations");
 const messageRoute = require("./routes/messages");
+const cors = require("cors");
 
 const multer = require("multer");
 const path = require("path");
@@ -17,6 +18,7 @@ const connectDB = require("./config/db");
 dotenv.config();
 connectDB();
 
+app.use(cors());
 app.use("/images", express.static(path.join(__dirname, "public/images")));
 
 //middleware
