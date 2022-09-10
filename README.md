@@ -1,9 +1,5 @@
 # SocialMediaBackend
 
-# backend_LeftOverMP_heroku
-link:
-https://leftoverbackend.herokuapp.com/
-
 
 # Collection #1 User
 The documents within this collection are structured as follows:
